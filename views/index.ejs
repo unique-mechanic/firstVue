@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSV Reader</title>
+  <style>
+    /* Ensure table container scrolls horizontally */
+    .table-container {
+      overflow-x: auto; /* Enables horizontal scrolling */
+      white-space: nowrap; /* Prevents wrapping of table content */
+    }
+    table {
+      border-collapse: collapse; /* Optional: Make table borders cleaner */
+      width: 100%; /* Ensure the table spans the full width */
+    }
+    th, td {
+      border: 1px solid #ddd; /* Adds borders for clarity */
+      padding: 8px; /* Adds padding for better spacing */
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2; /* Optional: Add background color for headers */
+    }
+  </style>
+</head>
+<body>
+  <h1>Upload a CSV File</h1>
+  <form action="/upload" method="POST" enctype="multipart/form-data">
+    <input type="file" name="csvFile" accept=".csv" required>
+    <button type="submit">Upload</button>
+  </form>
+  <br>
+  <form action="/upload2" method="POST" enctype="multipart/form-data">
+    <input type="file" name="csvFile" accept=".csv" required>
+    <button type="submit">View Data</button>
+  </form>
+  <hr>
+
+  <h1>Shifts Data</h1>
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Consname</th>
+          <th>Shift Booked Date</th>
+          <th>Shift Date</th>
+          <th>Status</th>
+          <th>Role</th>
+          <th>Candidate</th>
+          <th>Candidate Mobile</th>
+          <th>Candidate Email</th>
+          <th>Client Name</th>
+          <th>Filled By</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (tableData.length > 0) { %>
+          <% tableData.forEach(row => { %>
+            <tr>
+              <td><%= row.consname %></td>
+              <td><%= row.ShiftBookedDate %></td>
+              <td><%= row.ShiftDate %></td>
+              <td><%= row.Status %></td>
+              <td><%= row.role %></td>
+              <td><%= row.Candidate %></td>
+              <td><%= row.Candidate_Mobile %></td>
+              <td><%= row.Candidate_Email %></td>
+              <td><%= row.ClName %></td>
+              <td><%= row.FilledBy %></td>
+            </tr>
+          <% }) %>
+        <% } else { %>
+          <tr>
+            <td colspan="10">No data available</td>
+          </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+
+</body>
+</html>
